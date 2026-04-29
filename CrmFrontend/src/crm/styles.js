@@ -1,0 +1,67 @@
+import { C } from './data.js'
+
+export const S = {
+  card: (x = {}) => ({
+    background: C.w,
+    border: `1px solid ${C.bd}`,
+    borderRadius: 16,
+    padding: 18,
+    boxShadow: '0 10px 24px rgba(26,24,40,.06)',
+    ...x,
+  }),
+  btn: (v = 'primary', sm = false) => {
+    const M = {
+      primary: { bg: C.m, fg: '#fff', shadow: '0 8px 18px rgba(123,31,58,.18)' },
+      teal: { bg: C.t, fg: '#fff', shadow: '0 8px 18px rgba(26,107,107,.16)' },
+      purple: { bg: C.p, fg: '#fff', shadow: '0 8px 18px rgba(108,52,131,.16)' },
+      saffron: { bg: C.s, fg: '#fff', shadow: '0 8px 18px rgba(192,104,32,.16)' },
+      gold: { bg: C.g, fg: '#fff', shadow: '0 8px 18px rgba(185,150,44,.16)' },
+      outline: { bg: '#fff', fg: C.m, bd: `1px solid ${C.m}` },
+      ghost: { bg: '#fff', fg: C.k, bd: `1px solid ${C.bd}` },
+      ok: { bg: C.ok, fg: '#fff', shadow: '0 8px 18px rgba(42,122,80,.16)' },
+      danger: { bg: C.er, fg: '#fff', shadow: '0 8px 18px rgba(184,57,57,.16)' },
+    }
+    const b = M[v] || M.primary
+    return {
+      background: b.bg,
+      color: b.fg,
+      border: b.bd || 'none',
+      padding: sm ? '7px 12px' : '10px 16px',
+      minHeight: sm ? 34 : 40,
+      borderRadius: 11,
+      boxShadow: b.shadow || 'none',
+      fontFamily: 'inherit',
+      fontSize: sm ? 12 : 13,
+      fontWeight: 600,
+      letterSpacing: '.01em',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7,
+      whiteSpace: 'nowrap',
+      lineHeight: 1,
+      transition: 'transform .12s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease, opacity .16s ease',
+    }
+  },
+  inp: {
+    minHeight: 40,
+    padding: '10px 12px',
+    border: `1px solid ${C.bd}`,
+    borderRadius: 11,
+    fontFamily: 'inherit',
+    fontSize: 13,
+    background: '#fff',
+    color: C.k,
+    outline: 'none',
+    width: '100%',
+    boxShadow: 'inset 0 1px 2px rgba(26,24,40,.03)',
+    transition: 'border-color .16s ease, box-shadow .16s ease, background .16s ease',
+  },
+  title: { fontSize: 30, fontWeight: 700, letterSpacing: '-0.025em', color: C.k, lineHeight: 1.05 },
+  subtitle: { color: C.kS, fontSize: 13, marginTop: 6, lineHeight: 1.6 },
+  sectionTitle: { fontSize: 14, fontWeight: 700, color: C.k, letterSpacing: '-0.01em' },
+  cardTitle: { fontSize: 13, fontWeight: 700, color: C.k, letterSpacing: '-0.01em' },
+  meta: { fontSize: 11, color: C.kS, lineHeight: 1.5 },
+  kpiNumber: { fontSize: 28, fontWeight: 700, color: C.k, lineHeight: 1.05, letterSpacing: '-0.03em' },
+}

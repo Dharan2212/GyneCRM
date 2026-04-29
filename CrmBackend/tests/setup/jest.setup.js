@@ -1,0 +1,18 @@
+process.env.NODE_ENV = 'test';
+process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'Development';
+process.env.PORT_DEV = process.env.PORT_DEV || '4011';
+process.env.PORT = process.env.PORT || process.env.PORT_DEV;
+process.env.JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || 'test_access_secret';
+process.env.JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'test_refresh_secret';
+process.env.JWT_ACCESS_EXPIRES_IN = process.env.JWT_ACCESS_EXPIRES_IN || '15m';
+process.env.JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d';
+process.env.SECRET_KEY = process.env.SECRET_KEY || 'test_secret_key';
+process.env.COOKIE_SECURE = 'false';
+process.env.COOKIE_SAME_SITE = process.env.COOKIE_SAME_SITE || 'lax';
+process.env.REFRESH_TOKEN_COOKIE_NAME = process.env.REFRESH_TOKEN_COOKIE_NAME || 'gynecrm_refresh_token';
+process.env.TEST_DB_MODE = process.env.TEST_DB_MODE || 'memory';
+process.env.TEST_DB_NAME = process.env.TEST_DB_NAME || 'gynecrm_src_runtime_test';
+process.env.TEST_DB_SILENT_LOGS = process.env.TEST_DB_SILENT_LOGS || 'true';
+process.env.MONGODB_SERVER_SELECTION_TIMEOUT_MS = process.env.MONGODB_SERVER_SELECTION_TIMEOUT_MS || '10000';
+process.env.MONGODB_REPLICA_SET = process.env.TEST_DB_MODE === 'memory' ? '' : (process.env.MONGODB_REPLICA_SET || '');
+process.env.TZ = 'UTC';

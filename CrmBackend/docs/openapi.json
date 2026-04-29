@@ -1,0 +1,589 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "GyneCRM Active API",
+    "version": "1.0.0",
+    "description": "Current mounted src runtime routes only."
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized"
+      },
+      "ValidationFailed": {
+        "description": "Validation failed"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "API health check",
+        "security": []
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "security": []
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "summary": "Refresh session",
+        "security": []
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Logout"
+      }
+    },
+    "/auth/change-password": {
+      "post": {
+        "summary": "Change password"
+      }
+    },
+    "/doctors": {
+      "get": {
+        "summary": "List doctors"
+      },
+      "post": {
+        "summary": "Create doctor"
+      }
+    },
+    "/doctors/{id}": {
+      "get": {
+        "summary": "Doctor detail"
+      },
+      "put": {
+        "summary": "Update doctor"
+      }
+    },
+    "/masters/appointment-types": {
+      "get": {
+        "summary": "List appointment types"
+      },
+      "post": {
+        "summary": "Create appointment type"
+      }
+    },
+    "/masters/appointment-types/{id}": {
+      "put": {
+        "summary": "Update appointment type"
+      }
+    },
+    "/masters/service-catalog": {
+      "get": {
+        "summary": "List service catalog"
+      },
+      "post": {
+        "summary": "Create service catalog"
+      }
+    },
+    "/masters/service-catalog/{id}": {
+      "put": {
+        "summary": "Update service catalog"
+      }
+    },
+    "/masters/test-catalog": {
+      "get": {
+        "summary": "List test catalog"
+      },
+      "post": {
+        "summary": "Create test catalog"
+      }
+    },
+    "/masters/test-catalog/{id}": {
+      "put": {
+        "summary": "Update test catalog"
+      }
+    },
+    "/masters/lab-reference-ranges": {
+      "get": {
+        "summary": "List lab reference ranges"
+      },
+      "post": {
+        "summary": "Create lab reference range"
+      }
+    },
+    "/masters/lab-reference-ranges/{id}": {
+      "put": {
+        "summary": "Update lab reference range"
+      }
+    },
+    "/masters/hospital-protocols": {
+      "get": {
+        "summary": "List hospital protocols"
+      },
+      "post": {
+        "summary": "Create hospital protocol"
+      }
+    },
+    "/masters/hospital-protocols/{id}": {
+      "put": {
+        "summary": "Update hospital protocol"
+      }
+    },
+    "/patients": {
+      "get": {
+        "summary": "List patients"
+      },
+      "post": {
+        "summary": "Create patient"
+      }
+    },
+    "/patients/category-counts": {
+      "get": {
+        "summary": "Patient category counts"
+      }
+    },
+    "/patients/{id}": {
+      "get": {
+        "summary": "Patient detail"
+      },
+      "put": {
+        "summary": "Update patient"
+      }
+    },
+    "/patients/{id}/hub": {
+      "get": {
+        "summary": "Patient hub"
+      }
+    },
+    "/patients/{id}/category": {
+      "patch": {
+        "summary": "Update patient category"
+      }
+    },
+    "/patients/{id}/category-history": {
+      "get": {
+        "summary": "Patient category history"
+      }
+    },
+    "/appointments": {
+      "get": {
+        "summary": "List appointments"
+      },
+      "post": {
+        "summary": "Create appointment"
+      }
+    },
+    "/appointments/{id}": {
+      "get": {
+        "summary": "Appointment detail"
+      }
+    },
+    "/appointments/{id}/status": {
+      "patch": {
+        "summary": "Update appointment status"
+      }
+    },
+    "/appointments/{id}/check-in": {
+      "patch": {
+        "summary": "Check in appointment"
+      },
+      "post": {
+        "summary": "Check in appointment"
+      }
+    },
+    "/appointments/{id}/reschedule": {
+      "patch": {
+        "summary": "Reschedule appointment"
+      }
+    },
+    "/appointments/waitlist": {
+      "get": {
+        "summary": "List waitlist"
+      },
+      "post": {
+        "summary": "Create waitlist entry"
+      }
+    },
+    "/appointments/waitlist/{id}/status": {
+      "patch": {
+        "summary": "Update waitlist status"
+      }
+    },
+    "/dashboard/receptionist": {
+      "get": {
+        "summary": "Reception dashboard"
+      }
+    },
+    "/dashboard/doctor": {
+      "get": {
+        "summary": "Doctor dashboard"
+      }
+    },
+    "/consultations": {
+      "post": {
+        "summary": "Create consultation"
+      }
+    },
+    "/consultations/{id}": {
+      "get": {
+        "summary": "Consultation detail"
+      },
+      "put": {
+        "summary": "Update consultation"
+      }
+    },
+    "/consultations/{id}/status": {
+      "patch": {
+        "summary": "Update consultation status"
+      }
+    },
+    "/consultations/{id}/finalise": {
+      "patch": {
+        "summary": "Finalise consultation"
+      }
+    },
+    "/consultations/{id}/workspace": {
+      "get": {
+        "summary": "Consultation workspace"
+      }
+    },
+    "/consultations/{id}/follow-up": {
+      "get": {
+        "summary": "Consultation follow-up detail"
+      }
+    },
+    "/consultations/follow-ups": {
+      "get": {
+        "summary": "List follow-ups"
+      }
+    },
+    "/consultations/follow-ups/{id}/status": {
+      "patch": {
+        "summary": "Update follow-up status"
+      }
+    },
+    "/pregnancies": {
+      "post": {
+        "summary": "Create pregnancy"
+      }
+    },
+    "/pregnancies/{id}": {
+      "get": {
+        "summary": "Pregnancy detail"
+      },
+      "put": {
+        "summary": "Update pregnancy"
+      }
+    },
+    "/pregnancies/{id}/high-risk": {
+      "patch": {
+        "summary": "Update high-risk status"
+      }
+    },
+    "/pregnancies/{id}/milestones": {
+      "patch": {
+        "summary": "Update pregnancy milestones"
+      },
+      "get": {
+        "summary": "Get pregnancy milestones"
+      }
+    },
+    "/pregnancies/{id}/milestones/{milestoneCode}/status": {
+      "patch": {
+        "summary": "Update pregnancy milestone status"
+      }
+    },
+    "/prescriptions": {
+      "post": {
+        "summary": "Create prescription"
+      }
+    },
+    "/prescriptions/{id}": {
+      "get": {
+        "summary": "Prescription detail"
+      }
+    },
+    "/prescriptions/{id}/issue": {
+      "patch": {
+        "summary": "Issue prescription"
+      },
+      "post": {
+        "summary": "Issue prescription"
+      }
+    },
+    "/prescriptions/{id}/void": {
+      "patch": {
+        "summary": "Void prescription"
+      }
+    },
+    "/prescriptions/{id}/pdf": {
+      "get": {
+        "summary": "Prescription PDF foundation"
+      }
+    },
+    "/prescriptions/{id}/send": {
+      "patch": {
+        "summary": "Send prescription"
+      },
+      "post": {
+        "summary": "Send prescription"
+      }
+    },
+    "/test-orders/review-inbox": {
+      "get": {
+        "summary": "Review inbox"
+      }
+    },
+    "/test-orders": {
+      "post": {
+        "summary": "Create test order"
+      },
+      "get": {
+        "summary": "List test orders"
+      }
+    },
+    "/test-orders/{id}/pending-upload": {
+      "patch": {
+        "summary": "Move test order to pending upload"
+      }
+    },
+    "/test-orders/{id}/link-result": {
+      "patch": {
+        "summary": "Link result document"
+      }
+    },
+    "/test-orders/{id}/review-result": {
+      "patch": {
+        "summary": "Review result"
+      },
+      "post": {
+        "summary": "Review result"
+      }
+    },
+    "/test-orders/{id}/send-result": {
+      "patch": {
+        "summary": "Send reviewed result"
+      },
+      "post": {
+        "summary": "Send result"
+      }
+    },
+    "/documents/upload-url": {
+      "post": {
+        "summary": "Upload URL foundation"
+      }
+    },
+    "/documents": {
+      "post": {
+        "summary": "Create document metadata"
+      }
+    },
+    "/billing/invoices": {
+      "get": {
+        "summary": "List invoices"
+      },
+      "post": {
+        "summary": "Create invoice"
+      }
+    },
+    "/billing/invoices/{id}": {
+      "get": {
+        "summary": "Invoice detail"
+      },
+      "put": {
+        "summary": "Update invoice"
+      }
+    },
+    "/billing/invoices/{id}/items": {
+      "patch": {
+        "summary": "Add invoice items"
+      },
+      "post": {
+        "summary": "Add invoice items"
+      }
+    },
+    "/billing/invoices/{id}/finalize": {
+      "patch": {
+        "summary": "Finalize invoice"
+      },
+      "post": {
+        "summary": "Finalize invoice"
+      }
+    },
+    "/billing/invoices/{id}/payments": {
+      "patch": {
+        "summary": "Record payment"
+      },
+      "post": {
+        "summary": "Record payment"
+      }
+    },
+    "/billing/invoices/{id}/pdf": {
+      "get": {
+        "summary": "Invoice PDF foundation"
+      }
+    },
+    "/billing/invoices/{id}/send": {
+      "patch": {
+        "summary": "Send invoice"
+      },
+      "post": {
+        "summary": "Send invoice"
+      }
+    },
+    "/send-history": {
+      "get": {
+        "summary": "List send history"
+      }
+    },
+    "/send-history/{id}": {
+      "get": {
+        "summary": "Send history detail"
+      }
+    },
+    "/patients/{id}/send-history": {
+      "get": {
+        "summary": "Patient communication history"
+      }
+    },
+    "/notifications": {
+      "get": {
+        "summary": "List notifications"
+      },
+      "post": {
+        "summary": "Create notification"
+      }
+    },
+    "/notifications/{id}": {
+      "get": {
+        "summary": "Notification detail"
+      }
+    },
+    "/notifications/{id}/cancel": {
+      "patch": {
+        "summary": "Cancel notification"
+      }
+    },
+    "/events/dispatch": {
+      "post": {
+        "summary": "Dispatch event"
+      }
+    },
+    "/events/types": {
+      "get": {
+        "summary": "List event types"
+      }
+    },
+    "/events/template-map": {
+      "get": {
+        "summary": "List event template map"
+      }
+    },
+    "/events": {
+      "get": {
+        "summary": "List events"
+      }
+    },
+    "/events/{id}": {
+      "get": {
+        "summary": "Event detail"
+      }
+    },
+    "/jobs/dispatch": {
+      "post": {
+        "summary": "Dispatch job"
+      }
+    },
+    "/jobs/run/{jobType}": {
+      "post": {
+        "summary": "Run job manually"
+      }
+    },
+    "/jobs/types": {
+      "get": {
+        "summary": "List job types"
+      }
+    },
+    "/jobs": {
+      "get": {
+        "summary": "List jobs"
+      }
+    },
+    "/jobs/{id}": {
+      "get": {
+        "summary": "Job detail"
+      }
+    },
+    "/jobs/{id}/cancel": {
+      "patch": {
+        "summary": "Cancel job"
+      }
+    },
+    "/send-history/patients/{patientId}": {
+      "get": {
+        "summary": "Patient communication history (send-history alias)"
+      }
+    },
+    "/documents/{id}/url": {
+      "get": {
+        "summary": "Get document access foundation"
+      }
+    },
+    "/test-orders/{id}": {
+      "get": {
+        "summary": "Get test order detail"
+      }
+    },
+    "/test-orders/pending-upload": {
+      "get": {
+        "summary": "List pending-upload test orders"
+      }
+    },
+    "/consultations/{id}/finalize": {
+      "patch": {
+        "summary": "Finalize consultation"
+      },
+      "post": {
+        "summary": "Finalize consultation"
+      }
+    },
+    "/consultations/{id}/pdf": {
+      "get": {
+        "summary": "Consultation PDF foundation"
+      }
+    },
+    "/test-orders/pending-review": {
+      "get": {
+        "summary": "Pending review inbox"
+      }
+    },
+    "/documents/review-inbox": {
+      "get": {
+        "summary": "Document review inbox"
+      }
+    },
+    "/documents/{id}/review": {
+      "post": {
+        "summary": "Review document"
+      }
+    },
+    "/documents/{id}/flag": {
+      "post": {
+        "summary": "Flag document"
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "public": [
+    "landing-page",
+    "appointment-cta-to-login",
+    "guest-only-login",
+    "protected-route-redirection"
+  ],
+  "authSession": [
+    "login-success",
+    "login-invalid-credentials",
+    "refresh-restore",
+    "logout",
+    "change-password-forced-relogin",
+    "stale-session-fallback"
+  ],
+  "doctor": [
+    "dashboard-live",
+    "patient-hub-live",
+    "consultation-create-update-finalise",
+    "category-update",
+    "pregnancy-create-update-high-risk-milestones",
+    "prescription-create-issue-void-send-pdf-foundation",
+    "test-review-link-review-send",
+    "patient-send-history"
+  ],
+  "receptionist": [
+    "dashboard-live",
+    "register-patient",
+    "doctor-lookup-appointments",
+    "upload-foundation-and-document-metadata",
+    "billing-create-detail-items-finalize-pay-send"
+  ],
+  "admin": [
+    "admin-login",
+    "admin-shell-visibility"
+  ],
+  "regressionFocus": [
+    "role-leak-prevention",
+    "enum-status-consistency",
+    "upload-read-pdf-honesty",
+    "loading-error-empty-states",
+    "network-failure-retry"
+  ]
+}

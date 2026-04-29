@@ -1,0 +1,31 @@
+export const PATIENT_CATEGORY_VALUES = Object.freeze({
+  PREGNANCY: 'pregnancy',
+  IVF: 'ivf',
+  GYNAC: 'gynac',
+  UNCATEGORIZED: 'uncategorized',
+})
+
+export const PATIENT_CATEGORY_LABELS = Object.freeze({
+  [PATIENT_CATEGORY_VALUES.PREGNANCY]: 'Pregnancy',
+  [PATIENT_CATEGORY_VALUES.IVF]: 'IVF',
+  [PATIENT_CATEGORY_VALUES.GYNAC]: 'Gynac',
+  [PATIENT_CATEGORY_VALUES.UNCATEGORIZED]: 'Uncategorized',
+})
+
+export const TEMPLATE_PATIENT_CATEGORY_TO_BACKEND = Object.freeze({
+  Pregnancy: PATIENT_CATEGORY_VALUES.PREGNANCY,
+  Infertility: PATIENT_CATEGORY_VALUES.IVF,
+  IVF: PATIENT_CATEGORY_VALUES.IVF,
+  Gynac: PATIENT_CATEGORY_VALUES.GYNAC,
+})
+
+export const BACKEND_PATIENT_CATEGORY_TO_TEMPLATE = Object.freeze({
+  [PATIENT_CATEGORY_VALUES.PREGNANCY]: 'Pregnancy',
+  [PATIENT_CATEGORY_VALUES.IVF]: 'Infertility',
+  [PATIENT_CATEGORY_VALUES.GYNAC]: 'Gynac',
+  [PATIENT_CATEGORY_VALUES.UNCATEGORIZED]: null,
+})
+
+export function getPatientCategoryLabel(value) {
+  return PATIENT_CATEGORY_LABELS[value] || 'Uncategorized'
+}
