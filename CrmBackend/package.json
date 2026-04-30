@@ -1,11 +1,11 @@
 {
   "name": "oka_backend_api",
   "version": "1.0.0",
-  "description": "this is backend version of api CRM",
-  "main": "index.js",
+  "description": "CRM Backend API",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon node index.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
     "test": "jest --config jest.config.js --runInBand --detectOpenHandles",
     "start:new": "node src/server.js",
     "dev:new": "nodemon src/server.js",

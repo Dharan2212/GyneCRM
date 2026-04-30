@@ -1,70 +1,106 @@
-const http = require('http');
-const app = require('./app');
-const config = require('./config/env');
-const { connectDatabase, mongoose } = require('./db/mongoose');
-const logger = require('./utils/logger');
+//#region IMPORTS
+const express = require("express");
+const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
 
-let listenersBound = false;
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const http = require("http");
+const expressWs = require("express-ws");
 
-function bindProcessListeners(server) {
-  if (listenersBound) {
-    return;
-  }
+// ✅ FIXED PATHS
+const db = require("../models/index");
+const { mongoLogger } = require("../services/logger.services");
+const { APICODES } = require("../constant/constants");
+//#endregion
 
-  listenersBound = true;
+//#region CONFIGURE EXPRESS
+function configureExpress() {
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser());
+  app.use(cors());
 
-  const shutdown = async (signal) => {
-    logger.info('Received shutdown signal.', { signal });
+  app.use(express.static("public"));
+  app.use("/images", express.static("images"));
 
-    server.close(async () => {
-      try {
-        await mongoose.connection.close();
-        logger.info('HTTP server and MongoDB connection closed.');
-        process.exit(0);
-      } catch (error) {
-        logger.error('Error during shutdown.', error);
-        process.exit(1);
-      }
+  // Health check route
+  app.get("/", (req, res) => {
+    res.status(200).json({
+      status: "OK",
+      message: "GyneCRM Backend Running",
     });
-  };
-
-  process.on('SIGINT', () => shutdown('SIGINT'));
-  process.on('SIGTERM', () => shutdown('SIGTERM'));
-  process.on('unhandledRejection', (reason) => {
-    logger.error('Unhandled promise rejection.', reason instanceof Error ? reason : { reason });
-  });
-  process.on('uncaughtException', (error) => {
-    logger.error('Uncaught exception.', error);
   });
 }
+//#endregion
 
-async function startServer() {
+//#region DATABASE CONNECTION
+async function connectToDatabase() {
   try {
-    await connectDatabase();
+    const mongoUri =
+      process.env.DB_CON_STRING_PROD ||
+      process.env.DB_CON_STRING_DEV ||
+      process.env.DB_CON_STRING_STAGE;
 
-    const server = http.createServer(app);
-    const port = config.server.port;
+    const dbName =
+      process.env.DB_NAME_PROD ||
+      process.env.DB_NAME_DEV ||
+      process.env.DB_NAME_STAGE;
 
-    server.listen(port, () => {
-      logger.info('GyneCRM runtime listening.', {
-        port,
-        environment: config.env,
-      });
+    if (!mongoUri) {
+      console.error("❌ MongoDB URI missing");
+      process.exit(1);
+    }
+
+    await db.mongoose.connect(mongoUri, {
+      dbName: dbName,
     });
 
-    bindProcessListeners(server);
+    const connection = db.mongoose.connection;
 
-    return server;
+    connection.on("connected", () => {
+      console.log("✅ MongoDB connected");
+    });
+
+    connection.on("error", (err) => {
+      console.error("❌ MongoDB error:", err);
+    });
+
+    connection.on("disconnected", () => {
+      console.warn("⚠ MongoDB disconnected");
+    });
   } catch (error) {
-    logger.error('Failed to start runtime foundation.', error);
+    console.error("❌ DB connection failed:", error);
+    process.exit(1);
+  }
+}
+//#endregion
+
+//#region START SERVER
+async function startServer() {
+  try {
+    configureExpress();
+    await connectToDatabase();
+
+    const PORT = process.env.PORT || 5000;
+
+    const server = http.createServer(app);
+    expressWs(app, server);
+
+    server.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      mongoLogger("verbose", "SERVER", {
+        dataStream: { log: `Server running on port ${PORT}` },
+      });
+    });
+  } catch (error) {
+    console.error("❌ Server startup failed:", error);
     process.exit(1);
   }
 }
 
-if (require.main === module) {
-  startServer();
-}
+startServer();
+//#endregion
 
-module.exports = {
-  startServer,
-};
+module.exports = app;
